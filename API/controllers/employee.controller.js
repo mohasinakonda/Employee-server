@@ -1,13 +1,21 @@
 const Employee = require("../modals/Employee");
 // get users
-const getAllUser = async (req, res, next) => {
-  const employees = await Employee.find();
-  res.status(200).json(employees);
+const getAllUser = async (_req, res, next) => {
+  try {
+    const employees = await Employee.find();
+    res.status(200).json(employees);
+  } catch (err) {
+    next(err);
+  }
 };
 const getEmployeeByID = async (req, res, next) => {
   const id = req.params.id;
-  const employee = await Employee.findById(id);
-  res.status(200).json(employee);
+  try {
+    const employee = await Employee.findById(id);
+    res.status(200).json(employee);
+  } catch (err) {
+    next(err);
+  }
 };
 // create users
 
@@ -18,7 +26,7 @@ const createEmployee = async (req, res, next) => {
     const saveEmployee = await newEmployee.save();
     res.status(200).json(saveEmployee);
   } catch (err) {
-    console.log(err);
+    next(err);
   }
 };
 
@@ -33,7 +41,17 @@ const updateEmployee = async (req, res, next) => {
     );
     res.status(200).json(update);
   } catch (err) {
-    console.log(err);
+    next(err);
+  }
+};
+// delete employee
+const deleteEmployee = async (req, res, next) => {
+  const id = req.params.id;
+  try {
+    await Employee.findByIdAndDelete(id);
+    res.status(200).json("Employee deleted!");
+  } catch (err) {
+    next(err);
   }
 };
 module.exports = {
@@ -41,4 +59,5 @@ module.exports = {
   createEmployee,
   getEmployeeByID,
   updateEmployee,
+  deleteEmployee,
 };
