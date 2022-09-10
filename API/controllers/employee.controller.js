@@ -3,7 +3,8 @@ const Employee = require("../modals/Employee");
 const getAllUser = async (_req, res, next) => {
   try {
     const employees = await Employee.find();
-    res.status(200).json(employees);
+    const reversed = employees.reverse();
+    res.status(200).json(reversed);
   } catch (err) {
     next(err);
   }
