@@ -4,6 +4,7 @@ const {
   getEmployeeByID,
   updateEmployee,
   deleteEmployee,
+  getEmployeeByName,
 } = require("../controllers/employee.controller");
 
 const router = require("express").Router();
@@ -11,6 +12,8 @@ const router = require("express").Router();
 router.get("/", getAllUser);
 // get employee by id
 router.get("/:id", getEmployeeByID);
+// get employee by name
+router.get("/name/:name", getEmployeeByName);
 // create users
 router.post("/", createEmployee);
 // update employee

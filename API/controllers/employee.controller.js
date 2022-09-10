@@ -17,6 +17,15 @@ const getEmployeeByID = async (req, res, next) => {
     next(err);
   }
 };
+const getEmployeeByName = async (req, res, next) => {
+  const name = req.params.name;
+  try {
+    const employee = await Employee.find({ name: name });
+    res.status(200).json(employee);
+  } catch (err) {
+    next(err);
+  }
+};
 // create users
 
 const createEmployee = async (req, res, next) => {
@@ -33,6 +42,7 @@ const createEmployee = async (req, res, next) => {
 //update employee
 const updateEmployee = async (req, res, next) => {
   const id = req.params.id;
+  console.log(id);
   try {
     const update = await Employee.findByIdAndUpdate(
       id,
@@ -60,4 +70,5 @@ module.exports = {
   getEmployeeByID,
   updateEmployee,
   deleteEmployee,
+  getEmployeeByName,
 };

@@ -5,19 +5,17 @@ const employeeSchema = new Schema({
   name: {
     type: String,
     required: true,
-    unique: true,
   },
   email: {
     type: String,
     required: true,
-    unique: true,
   },
   salary: {
     type: Number,
     required: true,
   },
-  age: {
-    type: Number,
+  joiningDate: {
+    type: String,
     require: true,
   },
   photo: {
